@@ -8,7 +8,7 @@ import { Favorite } from "@mui/icons-material";
 
 export default function BasicCard() {
   return (
-    <Card variant="outlined" sx={{ width: 320 }}>
+    <Card className = "card" variant="outlined" sx={{ width: 320 }}>
       <Typography level="h2" fontSize="md" sx={{ mb: 0.5 }}>
         Yosemite National Park
       </Typography>
