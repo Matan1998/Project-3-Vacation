@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import ErrorHandler from "./MiddleWare/route-not-found";
 import config from "./Utils/Config";
 import userRouter from './Routes/UserRoutes'
+import logic from "./Logic/TableLogicMYSQL"
 //create server
 const server = express();
 
@@ -21,8 +22,12 @@ server.use(bodyParser.json());
 server.use("/api/v1/vacation/users", userRouter);
 // server.use("/api/v1/vacation/users", loginRouter);
 
+logic.createUsersTable()
+logic.createVacationsTable()
+
 //handle errors (route not found)
 server.use("*", ErrorHandler);
+
 
 //start the server
 server.listen(config.WebPort, () => {

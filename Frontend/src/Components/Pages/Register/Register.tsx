@@ -10,8 +10,9 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { User } from '../../../../../BackEnd/Models/User'
+import { User } from '../../../../../Backend/Models/user'
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const addNewUser = (newUser: User) => {
   axios
@@ -39,14 +40,23 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Register() {
+  const navigate = useNavigate()
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    const email = data.get('email') as string
+    const password = data.get('password') as string
+    const isAdmin = email === 'admin@admin.admin' && password === 'Admin'
+    const newUser: User = {
+      firstName: data.get('firstName') as string,
+      lastName: data.get('lastName') as string,
+      email: email,
+      password: password,
+      admin: isAdmin ? 1 : 0,
+    }
+    addNewUser(newUser)
+    navigate('/vacations')
+  }
 
   return (
     <ThemeProvider theme={theme}>
