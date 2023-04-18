@@ -1,0 +1,8 @@
+.MainLayout {
+  height: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 95% 5%
+}
+
+
